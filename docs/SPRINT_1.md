@@ -95,10 +95,10 @@ Out:
   - Root cause: Missing root `index.tsx` entry point; root layout with Stack navigator had no default route.
   - Fix: Created `app/index.tsx` with redirect to `/(tabs)/today` and registered `index` screen in root layout.
 
-### Gaps / Follow-ups
-- Settings repository/table usage not implemented yet (only schema exists).
-- Maestro E2E flow stub exists but needs runnable setup and CI wiring.
-- Build/compile verification and tests require dependency installation (blocked in current env).
+### Gaps / Follow-ups (Sprint 1 Follow-up Tasks)
+- [ ] Settings repository/table usage not implemented yet (only schema exists).
+- [ ] Maestro E2E flow stub exists but needs runnable setup and CI wiring.
+- [ ] Build/compile verification and tests require dependency installation (blocked in current env).
 
 ## 5. Suggested First Tickets
 1. `S1-001`: Initialize Expo app skeleton + lint/test config.
