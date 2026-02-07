@@ -105,6 +105,9 @@ Out:
 - Settings repository is now implemented for future settings usage, with defaults and unit tests in place.
 - Remaining follow-ups: wire Maestro E2E execution into CI and validate build/compile once dependencies are installed.
 
+### CI Updates
+- Added a pull request GitHub Action to run the test suite on every PR.
+
 ## 5. Suggested First Tickets
 1. `S1-001`: Initialize Expo app skeleton + lint/test config.
 2. `S1-002`: Add SQLite schema + migration bootstrap.
