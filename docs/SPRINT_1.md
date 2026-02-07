@@ -91,6 +91,9 @@ Out:
   - Root cause: expo-sqlite v16 removed the legacy `openDatabase()` API.
   - Fix: Updated `src/db/sqlite.ts` to use new `openDatabaseSync()` API with `getAllAsync()` for queries.
   - Also updated `src/repositories/SQLiteEntryRepository.ts` to use new `runSql()` for INSERT/UPDATE operations.
+- **Fixed "Unmatched Route" error on app launch**.
+  - Root cause: Missing root `index.tsx` entry point; root layout with Stack navigator had no default route.
+  - Fix: Created `app/index.tsx` with redirect to `/(tabs)/today` and registered `index` screen in root layout.
 
 ### Gaps / Follow-ups
 - Settings repository/table usage not implemented yet (only schema exists).
