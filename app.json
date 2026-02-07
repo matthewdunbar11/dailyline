@@ -5,12 +5,22 @@
     "scheme": "dailyline",
     "version": "0.1.0",
     "sdkVersion": "50.0.0",
-    "platforms": ["ios", "android", "web"],
-    "plugins": ["expo-router"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "plugins": [
+      "expo-router"
+    ],
     "extra": {
       "router": {
         "origin": "native"
+      },
+      "eas": {
+        "projectId": "03d28dee-2be8-4105-94ff-8152f172dd02"
       }
-    }
+    },
+    "owner": "matthewdunbar11"
   }
 }
