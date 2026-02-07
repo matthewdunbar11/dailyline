@@ -81,6 +81,16 @@ Out:
   - Root cause: `app.json` had `"extra.router.origin": "native"` which is not a valid URL.
   - Fix: Changed `"origin": "native"` to `"origin": false` in `app.json` (line 18).
   - Also installed missing `@types/react` dependency required by Expo SDK 54.
+- **Fixed React Native / Navigation compatibility issues**: App was crashing with URL and animated component errors.
+  - Root cause: Version mismatches between Expo SDK 54 and installed packages.
+  - Updated packages:
+    - `react-native`: 0.79.0 → 0.81.5
+    - `react-native-safe-area-context`: 5.0.0 → ~5.6.0
+    - `react-native-screens`: 4.0.0 → ~4.16.0
+- **Fixed SQLite API breaking changes**: `SQLite.openDatabase` is not a function error.
+  - Root cause: expo-sqlite v16 removed the legacy `openDatabase()` API.
+  - Fix: Updated `src/db/sqlite.ts` to use new `openDatabaseSync()` API with `getAllAsync()` for queries.
+  - Also updated `src/repositories/SQLiteEntryRepository.ts` to use new `runSql()` for INSERT/UPDATE operations.
 
 ### Gaps / Follow-ups
 - Settings repository/table usage not implemented yet (only schema exists).

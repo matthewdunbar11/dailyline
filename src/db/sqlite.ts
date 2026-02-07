@@ -1,26 +1,28 @@
 import * as SQLite from 'expo-sqlite';
 import { createTablesSql } from './schema';
 
-const database = SQLite.openDatabase('dailyline.db');
+export const database = SQLite.openDatabaseSync('dailyline.db');
 
-const executeSql = (sql: string, params: (string | number | null)[] = []): Promise<SQLite.SQLResultSet> => {
-  return new Promise((resolve, reject) => {
-    database.transaction((tx) => {
-      tx.executeSql(
-        sql,
-        params,
-        (_, result) => resolve(result),
-        (_, error) => {
-          reject(error);
-          return false;
-        }
-      );
-    });
-  });
+export const executeSql = async (
+  sql: string,
+  params: (string | number | null)[] = []
+): Promise<{ rows: { length: number; item: (idx: number) => any } }> => {
+  const rows = await database.getAllAsync(sql, params);
+  return {
+    rows: {
+      length: rows.length,
+      item: (idx: number) => rows[idx],
+    },
+  };
+};
+
+export const runSql = async (
+  sql: string,
+  params: (string | number | null)[] = []
+): Promise<SQLite.SQLiteRunResult> => {
+  return await database.runAsync(sql, params);
 };
 
 export const initializeDatabase = async (): Promise<void> => {
-  await executeSql(createTablesSql);
+  await runSql(createTablesSql);
 };
-
-export { database, executeSql };

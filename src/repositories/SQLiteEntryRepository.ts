@@ -1,4 +1,4 @@
-import { executeSql } from '../db/sqlite';
+import { executeSql, runSql } from '../db/sqlite';
 import type { Entry } from '../types/entry';
 import type { EntryRepository } from './EntryRepository';
 
@@ -21,7 +21,7 @@ export const SQLiteEntryRepository: EntryRepository = {
     return toEntry(result.rows.item(0));
   },
   async upsertEntry(entry: Entry) {
-    await executeSql(
+    await runSql(
       `INSERT INTO entries (id, date, text, mood, tags, createdAt, updatedAt)
        VALUES (?, ?, ?, ?, ?, ?, ?)
        ON CONFLICT(date) DO UPDATE SET
