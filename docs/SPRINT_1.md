@@ -61,6 +61,7 @@ Out:
 - Domain logic: date keys, entry editability rules, streak calculation, search filter.
 - UI: Today entry create/edit, History calendar + search + detail, Insights streak cards.
 - Unit tests added for date, entry rules, streaks, and search logic.
+- Settings repository implemented with default settings handling and in-memory coverage.
 
 ### Expo SDK 52 Upgrade
 - Upgraded from Expo SDK 50 to SDK 52 (latest stable).
@@ -96,9 +97,13 @@ Out:
   - Fix: Created `app/index.tsx` with redirect to `/(tabs)/today` and registered `index` screen in root layout.
 
 ### Gaps / Follow-ups (Sprint 1 Follow-up Tasks)
-- [ ] Settings repository/table usage not implemented yet (only schema exists).
 - [ ] Maestro E2E flow stub exists but needs runnable setup and CI wiring.
 - [ ] Build/compile verification and tests require dependency installation (blocked in current env).
+
+## 7. Final Review & Summary
+- Sprint 1 scope is complete for core Today/History/Insights flows, streak logic, and persistence.
+- Settings repository is now implemented for future settings usage, with defaults and unit tests in place.
+- Remaining follow-ups: wire Maestro E2E execution into CI and validate build/compile once dependencies are installed.
 
 ## 5. Suggested First Tickets
 1. `S1-001`: Initialize Expo app skeleton + lint/test config.
