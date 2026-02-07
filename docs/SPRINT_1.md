@@ -68,6 +68,13 @@ Out:
 - All unit tests pass.
 - Added GitHub Actions workflow for EAS updates to production channel.
 
+### Expo SDK 54 Upgrade
+- Upgraded from Expo SDK 52 to SDK 54 (latest stable).
+- Updated dependencies: expo ~54.0.33, react 19.1.0, react-dom 19.1.0, react-native 0.79.0, expo-router ~5.0.0, expo-sqlite ~16.0.0, expo-updates ~0.28.0, expo-linking (added), react-native-web ^0.21.0.
+- Updated dev dependencies: babel-preset-expo ^13.0.0, @types/node ^22.0.0.
+- All unit tests pass (7/7).
+- Web build requires additional WASM configuration for expo-sqlite (blocked).
+
 ### Gaps / Follow-ups
 - Settings repository/table usage not implemented yet (only schema exists).
 - Maestro E2E flow stub exists but needs runnable setup and CI wiring.
