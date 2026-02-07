@@ -21,6 +21,21 @@
         "projectId": "03d28dee-2be8-4105-94ff-8152f172dd02"
       }
     },
-    "owner": "matthewdunbar11"
+    "owner": "matthewdunbar11",
+    "android": {
+      "package": "com.matthewdunbar11.dailyline"
+    },
+    "ios": {
+      "bundleIdentifier": "com.matthewdunbar11.dailyline",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/03d28dee-2be8-4105-94ff-8152f172dd02"
+    }
   }
 }
