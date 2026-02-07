@@ -54,6 +54,7 @@ Out:
 6. Unit tests pass in CI/local run for all new logic.
 
 ## 6. Sprint 1 Implementation Review (Latest)
+
 ### Completed
 - App shell with Expo Router + tabs for Today, History, Insights, Settings.
 - SQLite schema bootstrap and entry repository for local persistence.
@@ -74,6 +75,12 @@ Out:
 - Updated dev dependencies: babel-preset-expo ^13.0.0, @types/node ^22.0.0.
 - All unit tests pass (7/7).
 - Web build requires additional WASM configuration for expo-sqlite (blocked).
+
+### Bug Fixes
+- **Fixed Metro server startup error**: `npm run start` was failing with "TypeError: Invalid URL" in CORS middleware.
+  - Root cause: `app.json` had `"extra.router.origin": "native"` which is not a valid URL.
+  - Fix: Changed `"origin": "native"` to `"origin": false` in `app.json` (line 18).
+  - Also installed missing `@types/react` dependency required by Expo SDK 54.
 
 ### Gaps / Follow-ups
 - Settings repository/table usage not implemented yet (only schema exists).

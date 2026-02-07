@@ -13,10 +13,10 @@
     "plugins": [
       "expo-router"
     ],
-    "extra": {
-      "router": {
-        "origin": "native"
-      },
+      "extra": {
+        "router": {
+          "origin": false
+        },
       "eas": {
         "projectId": "03d28dee-2be8-4105-94ff-8152f172dd02"
       }
