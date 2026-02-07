@@ -61,6 +61,13 @@ Out:
 - UI: Today entry create/edit, History calendar + search + detail, Insights streak cards.
 - Unit tests added for date, entry rules, streaks, and search logic.
 
+### Expo SDK 52 Upgrade
+- Upgraded from Expo SDK 50 to SDK 52 (latest stable).
+- Updated dependencies: expo ~52.0.25, react 18.3.1, react-native 0.76.6, expo-router ~4.0.16, expo-sqlite ~15.0.6, expo-updates ~0.26.11.
+- Updated dev dependencies: babel-preset-expo ^12.0.0.
+- All unit tests pass.
+- Added GitHub Actions workflow for EAS updates to production channel.
+
 ### Gaps / Follow-ups
 - Settings repository/table usage not implemented yet (only schema exists).
 - Maestro E2E flow stub exists but needs runnable setup and CI wiring.
