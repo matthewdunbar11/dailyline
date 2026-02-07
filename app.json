@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "DailyLine",
+    "slug": "dailyline",
+    "scheme": "dailyline",
+    "version": "0.1.0",
+    "sdkVersion": "50.0.0",
+    "platforms": ["ios", "android", "web"],
+    "plugins": ["expo-router"],
+    "extra": {
+      "router": {
+        "origin": "native"
+      }
+    }
+  }
+}

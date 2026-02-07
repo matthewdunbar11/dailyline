@@ -10,6 +10,11 @@
 - If web/browser behavior is affected and runnable, verify in browser.
 5. Commit the change to a non-main branch.
 
+## Sprint Docs Workflow (DailyLine)
+1. Sprint plans live in `docs/` (for example, `docs/SPRINT_1.md`).
+2. Review your work against the relevant sprint doc before committing.
+3. Update the sprint doc with a brief status/review summary after finishing the work.
+
 ## Branching And Commits
 1. Never commit directly to `main`.
 2. Work on a feature branch (create one if not already on one).

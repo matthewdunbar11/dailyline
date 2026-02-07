@@ -1,0 +1,11 @@
+appId: com.dailyline
+---
+- launchApp
+- tapOn: "Today"
+- tapOn: "Write one line for today"
+- inputText: "A calm day"
+- tapOn: "Save"
+- tapOn: "History"
+- assertVisible: "A calm day"
+- tapOn: "Insights"
+- assertVisible: "Current streak"
