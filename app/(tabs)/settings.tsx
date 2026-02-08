@@ -5,8 +5,12 @@ export default function SettingsScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.card}>
-        <Text style={styles.title}>Settings</Text>
-        <Text style={styles.text}>Reminder and export controls land here in Sprint 2.</Text>
+        <View style={styles.cardContent}>
+          <Text style={styles.title}>Settings</Text>
+          <Text style={styles.text}>
+            Reminder and export controls land here in Sprint 2.
+          </Text>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -24,6 +28,9 @@ const styles = StyleSheet.create({
     padding: 16,
     borderColor: colors.border,
     borderWidth: 1
+  },
+  cardContent: {
+    gap: 8
   },
   title: {
     fontSize: 18,
