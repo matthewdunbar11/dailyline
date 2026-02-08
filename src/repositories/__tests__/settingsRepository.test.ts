@@ -1,5 +1,5 @@
 import { createInMemorySettingsRepository } from '../InMemorySettingsRepository';
-import { getDefaultSettings } from '../../types/settings';
+import { getDefaultSettings, type UserSettings } from '../../types/settings';
 
 const defaultSettings = getDefaultSettings();
 
@@ -31,7 +31,7 @@ describe('InMemorySettingsRepository', () => {
   it('replaces settings when setSettings is called', async () => {
     const repository = createInMemorySettingsRepository();
 
-    const replacement = {
+    const replacement: UserSettings = {
       ...defaultSettings,
       timezone: 'America/Chicago',
       premiumStatus: 'premium'
