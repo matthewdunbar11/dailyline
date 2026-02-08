@@ -48,7 +48,12 @@ Out:
 ## 6. Sprint 2 Implementation Review (Latest)
 
 ### Completed
-- TBD
+- **S2-001**: Build reminder settings UI + persistence
+  - Created `useSettings` hook for reactive settings state management
+  - Added reminder toggle with Switch component
+  - Implemented time picker with hour/minute inputs (00-23, 00-59)
+  - Settings persist to SQLite via existing repository
+  - Loading state handled with ActivityIndicator
 
 ### Gaps / Follow-ups
 - TBD
