@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
+  Pressable,
   SafeAreaView,
   StyleSheet,
   Switch,
@@ -10,6 +11,11 @@ import {
 } from 'react-native';
 import { colors } from '../../src/theme/colors';
 import { useSettings } from '../../src/hooks/useSettings';
+import { exportDataToFile } from '../../src/services/exportService';
+import {
+  scheduleDailyReminder,
+  type ReminderPermissionStatus
+} from '../../src/services/notifications';
 
 const formatTimeUnit = (value: number): string => {
   return value.toString().padStart(2, '0');
@@ -25,6 +31,10 @@ export default function SettingsScreen() {
   const { settings, loading, updateSettings } = useSettings();
   const [localHour, setLocalHour] = useState<string>('');
   const [localMinute, setLocalMinute] = useState<string>('');
+  const [reminderStatus, setReminderStatus] = useState<ReminderPermissionStatus | null>(null);
+  const [isScheduling, setIsScheduling] = useState(false);
+  const [exportStatus, setExportStatus] = useState<string | null>(null);
+  const [isExporting, setIsExporting] = useState(false);
 
   const handleToggleReminder = async (enabled: boolean) => {
     await updateSettings({ reminderEnabled: enabled });
@@ -57,6 +67,42 @@ export default function SettingsScreen() {
     if (settings) {
       setLocalMinute('');
       updateSettings({ reminderMinute: settings.reminderMinute });
+    }
+  };
+
+  useEffect(() => {
+    if (!settings) return;
+    let isActive = true;
+
+    const syncReminder = async () => {
+      setIsScheduling(true);
+      const result = await scheduleDailyReminder(settings);
+      if (!isActive) return;
+      setReminderStatus(result.permissionStatus);
+      setIsScheduling(false);
+    };
+
+    syncReminder();
+
+    return () => {
+      isActive = false;
+    };
+  }, [settings?.reminderEnabled, settings?.reminderHour, settings?.reminderMinute]);
+
+  const handleExport = async () => {
+    setIsExporting(true);
+    setExportStatus(null);
+    try {
+      const result = await exportDataToFile();
+      setExportStatus(
+        result.shared
+          ? 'Export ready to share.'
+          : `Export saved to ${result.uri}. Share manually if needed.`
+      );
+    } catch (error) {
+      setExportStatus('Export failed. Please try again.');
+    } finally {
+      setIsExporting(false);
     }
   };
 
@@ -110,6 +156,17 @@ export default function SettingsScreen() {
                   selectTextOnFocus
                 />
               </View>
+              {isScheduling && <Text style={styles.helperText}>Updating reminder...</Text>}
+              {reminderStatus === 'denied' && (
+                <Text style={styles.warningText}>
+                  Notifications are disabled. Enable them in system settings to receive reminders.
+                </Text>
+              )}
+              {reminderStatus === 'unavailable' && (
+                <Text style={styles.warningText}>
+                  Notifications are unavailable on this device.
+                </Text>
+              )}
             </View>
           )}
         </View>
@@ -118,7 +175,21 @@ export default function SettingsScreen() {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Export</Text>
         <View style={styles.card}>
-          <Text style={styles.text}>Export functionality coming in Sprint 2.</Text>
+          <Text style={styles.text}>Create a JSON backup of your entries and settings.</Text>
+          <Pressable
+            style={({ pressed }) => [
+              styles.exportButton,
+              pressed && styles.exportButtonPressed,
+              isExporting && styles.exportButtonDisabled
+            ]}
+            onPress={handleExport}
+            disabled={isExporting}
+          >
+            <Text style={styles.exportButtonText}>
+              {isExporting ? 'Exporting...' : 'Export Data'}
+            </Text>
+          </Pressable>
+          {exportStatus && <Text style={styles.helperText}>{exportStatus}</Text>}
         </View>
       </View>
     </SafeAreaView>
@@ -158,6 +229,33 @@ const styles = StyleSheet.create({
   },
   text: {
     color: colors.muted
+  },
+  helperText: {
+    marginTop: 12,
+    color: colors.muted,
+    fontSize: 13
+  },
+  warningText: {
+    marginTop: 12,
+    color: colors.accent,
+    fontSize: 13
+  },
+  exportButton: {
+    marginTop: 12,
+    backgroundColor: colors.accent,
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: 'center'
+  },
+  exportButtonPressed: {
+    opacity: 0.85
+  },
+  exportButtonDisabled: {
+    opacity: 0.6
+  },
+  exportButtonText: {
+    color: '#FFFFFF',
+    fontWeight: '600'
   },
   timePickerContainer: {
     marginTop: 16,
