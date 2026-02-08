@@ -49,10 +49,11 @@ Out:
 ### Status Update
 - Sprint 1B plan documented with UI polish scope and definition of done.
 - `S1B-001` audit completed; follow-up tickets added for UI consistency cleanup.
+- `S1B-002` completed with Ionicons mapped to tab navigation for Today, History, Insights, and Settings.
 
 ### Ticket Status
 - `S1B-001`: ✅ Completed (UI audit documented below).
-- `S1B-002`: ⏳ Pending.
+- `S1B-002`: ✅ Completed (tab bar iconography added for core navigation).
 - `S1B-003`: ⏳ Pending.
 - `S1B-004`: ⏳ Pending.
 - `S1B-005`: 🆕 Proposed (normalize typography scale on core screens).
