@@ -1,5 +1,7 @@
 # DailyLine Sprint 1 Plan
 
+**Status:** Done
+
 ## 1. Sprint Outcome
 Ship the first usable slice:
 1. App shell with navigation.
@@ -104,6 +106,9 @@ Out:
 - Sprint 1 scope is complete for core Today/History/Insights flows, streak logic, and persistence.
 - Settings repository is now implemented for future settings usage, with defaults and unit tests in place.
 - Remaining follow-ups: wire Maestro E2E execution into CI and validate build/compile once dependencies are installed.
+
+### Status Update
+- Marked Sprint 1 as done based on completed scope and definition of done.
 
 ### CI Updates
 - Added a pull request GitHub Action to run the test suite on every PR.
