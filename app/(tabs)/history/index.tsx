@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   calendarCellActive: {
-    backgroundColor: '#DDE6FF'
+    backgroundColor: colors.calendarHighlight
   },
   calendarCellSelected: {
     borderColor: colors.accent,
