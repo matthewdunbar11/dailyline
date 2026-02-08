@@ -89,3 +89,7 @@ Out:
 - Added `EntitlementState` domain helpers with `unknown` -> `lastKnownStatus` fallback behavior.
 - Added SQLite and in-memory entitlement repositories.
 - Added repository/domain unit tests for entitlement transitions.
+4. Implemented `S3-003` `FeatureAccessService` with gate matrix tests:
+- Added centralized feature access rules for core journaling, premium AI cards, restore visibility, and ads display.
+- Encoded `unknown` entitlement policy: free-locked for premium features, last-known fallback for ads.
+- Added unit tests for free/premium/unknown entitlement scenarios.
