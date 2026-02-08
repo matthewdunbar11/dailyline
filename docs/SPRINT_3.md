@@ -101,3 +101,6 @@ Out:
 - Added shared `AdSlot` component and ad visibility hook.
 - Wired ad slots into Today, History, Insights, and Settings screens.
 - Enforced ad show/hide behavior using entitlement-aware feature access rules.
+7. Implemented `S3-006` entitlement and feature-gate transition tests:
+- Added integration-style tests covering purchase success transition behavior.
+- Added unknown-entitlement fallback tests for premium lock policy vs ad visibility policy.
