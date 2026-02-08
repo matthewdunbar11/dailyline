@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     padding: 20
   },
   dateLabel: {
-    fontSize: 14,
+    fontSize: 12,
     color: colors.muted,
     marginBottom: 8
   },

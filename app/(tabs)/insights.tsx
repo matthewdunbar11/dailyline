@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     padding: 20
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '600',
     color: colors.text,
     marginBottom: 16
@@ -56,11 +56,12 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     marginTop: 16,
-    color: colors.muted
+    color: colors.muted,
+    fontSize: 12
   },
   card: {
     backgroundColor: colors.card,
-    borderRadius: 16,
+    borderRadius: 12,
     padding: 16,
     borderColor: colors.border,
     borderWidth: 1,
@@ -68,7 +69,8 @@ const styles = StyleSheet.create({
   },
   label: {
     color: colors.muted,
-    marginBottom: 8
+    marginBottom: 8,
+    fontSize: 12
   },
   value: {
     fontSize: 18,
