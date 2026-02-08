@@ -88,3 +88,6 @@ If Sprint 3 is partially complete, Sprint 4 starts with a short stabilization la
 ## 10. Planning Status Update (February 8, 2026)
 1. Added `docs/SPRINT_BACKLOG.md` to sequence Sprint 3 prerequisites ahead of Sprint 4 AI delivery.
 2. Sprint 4 remains gated on Sprint 3 entitlement/gating completion before AI card implementation begins.
+
+## 11. Engineering Status Update (March 12, 2026)
+1. Added GitHub Actions coverage to run Android-only Maestro flows on pull requests and pushes to `master`.

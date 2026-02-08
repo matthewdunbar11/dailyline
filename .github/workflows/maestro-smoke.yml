@@ -1,29 +1,51 @@
-name: Maestro Smoke
+name: Maestro Android
 
 on:
   pull_request:
-  schedule:
-    - cron: '0 8 * * *'
+  push:
+    branches:
+      - master
 
 jobs:
-  maestro-dry-run:
+  maestro-android:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        flow:
-          - maestro/sprint1.yaml
-          - maestro/sprint3-ads-gating.yaml
-          - maestro/sprint3-restore-smoke.yaml
-          - maestro/sprint3-unknown-fallback.yaml
+    timeout-minutes: 60
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
 
       - name: Install Maestro CLI
         run: |
           curl -Ls "https://get.maestro.mobile.dev" | bash
           echo "$HOME/.maestro/bin" >> $GITHUB_PATH
 
-      - name: Validate Maestro flow
-        run: maestro test --dry-run "${{ matrix.flow }}"
+      - name: Generate Android project
+        run: npx expo prebuild --platform android --no-install
+
+      - name: Build Android debug APK
+        run: |
+          cd android
+          ./gradlew assembleDebug
+
+      - name: Run Maestro Android flows
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 33
+          arch: x86_64
+          script: |
+            adb install -r android/app/build/outputs/apk/debug/app-debug.apk
+            maestro test maestro/sprint1.yaml maestro/sprint3-ads-gating.yaml maestro/sprint3-restore-smoke.yaml maestro/sprint3-unknown-fallback.yaml
