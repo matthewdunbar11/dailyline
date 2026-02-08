@@ -93,3 +93,7 @@ Out:
 - Added centralized feature access rules for core journaling, premium AI cards, restore visibility, and ads display.
 - Encoded `unknown` entitlement policy: free-locked for premium features, last-known fallback for ads.
 - Added unit tests for free/premium/unknown entitlement scenarios.
+5. Implemented `S3-004` Premium section on Settings:
+- Added entitlement hook wiring (`useEntitlement`) for plan state and purchase/restore actions.
+- Added Premium settings card with current plan, upgrade CTA, and gated restore action visibility.
+- Wired Premium section behavior through `FeatureAccessService` policy checks.

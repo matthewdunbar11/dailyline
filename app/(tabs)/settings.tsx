@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Pressable,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Switch,
   Text,
@@ -11,7 +12,9 @@ import {
 } from 'react-native';
 import { colors } from '../../src/theme/colors';
 import { useSettings } from '../../src/hooks/useSettings';
+import { useEntitlement } from '../../src/hooks/useEntitlement';
 import { exportDataToFile } from '../../src/services/exportService';
+import { getFeatureAccess } from '../../src/services/featureAccess';
 import {
   scheduleDailyReminder,
   type ReminderPermissionStatus
@@ -29,6 +32,16 @@ const parseTimeInput = (value: string, max: number): number => {
 
 export default function SettingsScreen() {
   const { settings, loading, updateSettings } = useSettings();
+  const {
+    entitlementState,
+    effectiveEntitlement,
+    premiumProduct,
+    loading: entitlementLoading,
+    actionInFlight,
+    statusMessage,
+    purchasePremium,
+    restorePremium
+  } = useEntitlement();
   const [localHour, setLocalHour] = useState<string>('');
   const [localMinute, setLocalMinute] = useState<string>('');
   const [reminderStatus, setReminderStatus] = useState<ReminderPermissionStatus | null>(null);
@@ -117,8 +130,27 @@ export default function SettingsScreen() {
   const displayHour = localHour !== '' ? localHour : formatTimeUnit(settings.reminderHour);
   const displayMinute = localMinute !== '' ? localMinute : formatTimeUnit(settings.reminderMinute);
 
+  const restoreAccess = getFeatureAccess('settings.restorePurchase', {
+    entitlement: entitlementState?.status ?? 'unknown',
+    aiInsightsEnabled: settings.aiInsightsEnabled,
+    lastKnownEntitlement: entitlementState?.lastKnownStatus
+  });
+
+  const showRestoreButton = restoreAccess === 'enabled';
+  const isPremium = effectiveEntitlement === 'premium';
+  const planLabel = isPremium ? 'Premium' : 'Free';
+  const upgradeCta =
+    actionInFlight === 'purchase'
+      ? 'Processing...'
+      : isPremium
+        ? 'Premium Active'
+        : 'Upgrade to Premium';
+  const restoreCta =
+    actionInFlight === 'restore' ? 'Restoring...' : 'Restore Purchases';
+
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView contentContainerStyle={styles.content}>
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Reminders</Text>
         <View style={styles.card}>
@@ -173,6 +205,56 @@ export default function SettingsScreen() {
       </View>
 
       <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Premium</Text>
+        <View style={styles.card}>
+          <Text style={styles.label}>Current Plan: {planLabel}</Text>
+          {premiumProduct?.available && premiumProduct.price ? (
+            <Text style={styles.helperText}>Lifetime unlock: {premiumProduct.price}</Text>
+          ) : (
+            <Text style={styles.helperText}>
+              Premium pricing is currently unavailable in this environment.
+            </Text>
+          )}
+          <Pressable
+            style={({ pressed }) => [
+              styles.exportButton,
+              pressed && styles.exportButtonPressed,
+              (actionInFlight !== null || isPremium || entitlementLoading) &&
+                styles.exportButtonDisabled
+            ]}
+            onPress={() => {
+              purchasePremium();
+            }}
+            disabled={actionInFlight !== null || isPremium || entitlementLoading}
+          >
+            <Text style={styles.exportButtonText}>{upgradeCta}</Text>
+          </Pressable>
+          {showRestoreButton && (
+            <Pressable
+              style={({ pressed }) => [
+                styles.secondaryButton,
+                pressed && styles.exportButtonPressed,
+                (actionInFlight !== null || entitlementLoading) &&
+                  styles.exportButtonDisabled
+              ]}
+              onPress={() => {
+                restorePremium();
+              }}
+              disabled={actionInFlight !== null || entitlementLoading}
+            >
+              <Text style={styles.secondaryButtonText}>{restoreCta}</Text>
+            </Pressable>
+          )}
+          {entitlementState?.status === 'unknown' && (
+            <Text style={styles.helperText}>
+              Store status is temporarily unavailable. Last known plan: {entitlementState.lastKnownStatus}.
+            </Text>
+          )}
+          {statusMessage && <Text style={styles.helperText}>{statusMessage}</Text>}
+        </View>
+      </View>
+
+      <View style={styles.section}>
         <Text style={styles.sectionTitle}>Export</Text>
         <View style={styles.card}>
           <Text style={styles.text}>Create a JSON backup of your entries and settings.</Text>
@@ -192,6 +274,7 @@ export default function SettingsScreen() {
           {exportStatus && <Text style={styles.helperText}>{exportStatus}</Text>}
         </View>
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -201,6 +284,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
     padding: 20
+  },
+  content: {
+    paddingBottom: 32
   },
   section: {
     marginBottom: 24
@@ -255,6 +341,19 @@ const styles = StyleSheet.create({
   },
   exportButtonText: {
     color: '#FFFFFF',
+    fontWeight: '600'
+  },
+  secondaryButton: {
+    marginTop: 12,
+    borderColor: colors.border,
+    borderWidth: 1,
+    paddingVertical: 12,
+    borderRadius: 10,
+    alignItems: 'center',
+    backgroundColor: colors.background
+  },
+  secondaryButtonText: {
+    color: colors.text,
     fontWeight: '600'
   },
   timePickerContainer: {

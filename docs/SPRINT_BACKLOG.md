@@ -11,9 +11,9 @@
 | Priority | Ticket | Description | Dependency | Column | Status |
 | --- | --- | --- | --- | --- | --- |
 | P0 | `S3-001` | Add IAP product config and purchase service wrapper | None | Now | Done |
-| P0 | `S3-002` | Implement entitlement repository and cached-state fallback | S3-001 | Now | Ready |
-| P0 | `S3-003` | Implement `FeatureAccessService` and gate matrix tests | S3-002 | Now | Ready |
-| P0 | `S3-004` | Build Settings premium section (upgrade + restore) | S3-001, S3-002 | Next | Ready |
+| P0 | `S3-002` | Implement entitlement repository and cached-state fallback | S3-001 | Now | Done |
+| P0 | `S3-003` | Implement `FeatureAccessService` and gate matrix tests | S3-002 | Now | Done |
+| P0 | `S3-004` | Build Settings premium section (upgrade + restore) | S3-001, S3-002 | Next | Done |
 | P1 | `S3-005` | Integrate ad wrapper and entitlement-driven ad removal | S3-003 | Next | Ready |
 | P1 | `S3-006` | Add unit tests for entitlement transitions + gate behavior | S3-002, S3-003 | Next | Ready |
 | P1 | `S3-007` | Add Maestro purchase/restore/ads smoke flows | S3-004, S3-005 | Later | Ready |
