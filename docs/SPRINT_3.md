@@ -77,3 +77,11 @@ Out:
 2. Reviewed `docs/SPRINT_1.md`, `docs/SPRINT_1B.md`, `docs/SPRINT_2.md` to avoid overlap.
 3. Verified current repo does not yet implement IAP, entitlement management, or ads integration.
 
+
+## 9. Planning Status Update (February 8, 2026)
+1. Added `docs/SPRINT_BACKLOG.md` with prioritized Sprint 3 and Sprint 4 board sequencing.
+2. Implemented `S3-001` scaffold in `src/services/iap/` (status: done for planning/architecture slice):
+- Lifetime premium product config.
+- Pluggable IAP client interface with unavailable fallback.
+- Service wrapper for product lookup, purchase, and restore operations.
+- Unit tests for config and service behavior.
