@@ -85,3 +85,7 @@ Out:
 - Pluggable IAP client interface with unavailable fallback.
 - Service wrapper for product lookup, purchase, and restore operations.
 - Unit tests for config and service behavior.
+3. Implemented `S3-002` entitlement repository and cached fallback state model:
+- Added `EntitlementState` domain helpers with `unknown` -> `lastKnownStatus` fallback behavior.
+- Added SQLite and in-memory entitlement repositories.
+- Added repository/domain unit tests for entitlement transitions.
