@@ -54,9 +54,19 @@ Out:
   - Implemented time picker with hour/minute inputs (00-23, 00-59)
   - Settings persist to SQLite via existing repository
   - Loading state handled with ActivityIndicator
+- **S2-002**: Implement notification scheduling + permission UX
+  - Added notification scheduling service with permission handling
+  - Wired reminder scheduling to settings changes with feedback messaging
+  - Added permission-denied guidance in settings screen
+- **S2-003**: Implement export/backup service and share flow
+  - Added export service to build JSON payload and write file
+  - Added settings UI to trigger export and share or save locally
+- **S2-004**: Add unit tests for reminder/export logic
+  - Added unit tests for reminder scheduling behavior
+  - Added unit tests for export payload formatting
 
 ### Gaps / Follow-ups
 - TBD
 
 ## 7. Final Review & Summary
-- TBD
+- Implemented reminder scheduling with permissions, export/backup flow, and unit tests to cover the new reminder/export logic.
