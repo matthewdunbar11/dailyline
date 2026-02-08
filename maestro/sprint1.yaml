@@ -1,4 +1,4 @@
-appId: com.dailyline
+appId: com.matthewdunbar11.dailyline
 ---
 - launchApp
 - tapOn: "Today"

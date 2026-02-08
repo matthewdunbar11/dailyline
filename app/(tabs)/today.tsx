@@ -14,6 +14,7 @@ import { getTodayKey, isToday } from '../../src/domain/date';
 import { isEntryEditable } from '../../src/domain/entryRules';
 import { createId } from '../../src/utils/id';
 import { getEntryRepository } from '../../src/repositories';
+import { AdSlot } from '../../src/components/AdSlot';
 import type { Entry } from '../../src/types/entry';
 
 const emptyEntry = (dateKey: string): Entry => {
@@ -147,6 +148,7 @@ export default function TodayScreen() {
       {!canEdit && (
         <Text style={styles.lockedText}>Past entries are read-only.</Text>
       )}
+      <AdSlot placement="today-footer" />
     </SafeAreaView>
   );
 }

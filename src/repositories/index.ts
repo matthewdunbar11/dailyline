@@ -1,5 +1,6 @@
 import { initializeDatabase } from '../db/sqlite';
 import { SQLiteEntryRepository } from './SQLiteEntryRepository';
+import { SQLiteEntitlementRepository } from './SQLiteEntitlementRepository';
 import { SQLiteSettingsRepository } from './SQLiteSettingsRepository';
 
 let initialized = false;
@@ -18,4 +19,12 @@ export const getSettingsRepository = async () => {
     initialized = true;
   }
   return SQLiteSettingsRepository;
+};
+
+export const getEntitlementRepository = async () => {
+  if (!initialized) {
+    await initializeDatabase();
+    initialized = true;
+  }
+  return SQLiteEntitlementRepository;
 };

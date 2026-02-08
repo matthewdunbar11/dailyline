@@ -4,6 +4,7 @@ import { colors } from '../../src/theme/colors';
 import { calculateStreaks } from '../../src/domain/streak';
 import { getTodayKey } from '../../src/domain/date';
 import { getEntryRepository } from '../../src/repositories';
+import { AdSlot } from '../../src/components/AdSlot';
 import type { Entry } from '../../src/types/entry';
 
 export default function InsightsScreen() {
@@ -35,6 +36,7 @@ export default function InsightsScreen() {
         </View>
       </View>
       <Text style={styles.subtitle}>Entries counted: {entries.length}</Text>
+      <AdSlot placement="insights-footer" />
     </SafeAreaView>
   );
 }

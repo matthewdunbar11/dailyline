@@ -1,0 +1,19 @@
+appId: com.matthewdunbar11.dailyline
+---
+- launchApp
+- tapOn: "Today"
+- assertVisible: "Sponsored placement: today-footer"
+- tapOn: "Settings"
+- scrollUntilVisible:
+    element:
+      text: "Testing Controls"
+- tapOn: "Simulate Premium"
+- tapOn: "Today"
+- assertNotVisible: "Sponsored placement: today-footer"
+- tapOn: "Settings"
+- scrollUntilVisible:
+    element:
+      text: "Testing Controls"
+- tapOn: "Simulate Free"
+- tapOn: "Today"
+- assertVisible: "Sponsored placement: today-footer"
