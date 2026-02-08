@@ -4,5 +4,6 @@ export const colors = {
   text: '#1F1F1F',
   muted: '#6B6B6B',
   accent: '#4E7CFF',
-  border: '#E3E1DC'
+  border: '#E3E1DC',
+  calendarHighlight: '#DDE6FF'
 };

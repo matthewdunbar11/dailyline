@@ -50,6 +50,7 @@ Out:
 - Sprint 1B plan documented with UI polish scope and definition of done.
 - `S1B-001` audit completed; follow-up tickets added for UI consistency cleanup.
 - `S1B-002` completed with Ionicons mapped to tab navigation for Today, History, Insights, and Settings.
+- `S1B-007` completed with calendar highlight color aligned to the shared theme token.
 
 ### Ticket Status
 - `S1B-001`: ✅ Completed (UI audit documented below).
@@ -58,7 +59,7 @@ Out:
 - `S1B-004`: ⏳ Pending.
 - `S1B-005`: 🆕 Proposed (normalize typography scale on core screens).
 - `S1B-006`: 🆕 Proposed (align card/input corner radii and spacing).
-- `S1B-007`: 🆕 Proposed (replace hard-coded calendar highlight color with theme token).
+- `S1B-007`: ✅ Completed (calendar highlight now uses theme token).
 
 ### UI Audit Notes (S1B-001)
 - Typography scale varies between screens: Today section titles use 16px while Insights title is 20px and Settings title is 18px; entry metadata uses 12px in History while date label uses 14px in Today.
