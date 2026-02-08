@@ -107,6 +107,7 @@ Out:
 
 ### CI Updates
 - Added a pull request GitHub Action to run the test suite on every PR.
+- Fixed settings repository test typing to keep CI green.
 
 ## 5. Suggested First Tickets
 1. `S1-001`: Initialize Expo app skeleton + lint/test config.
