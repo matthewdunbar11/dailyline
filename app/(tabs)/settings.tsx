@@ -16,6 +16,8 @@ import { useEntitlement } from '../../src/hooks/useEntitlement';
 import { exportDataToFile } from '../../src/services/exportService';
 import { getFeatureAccess } from '../../src/services/featureAccess';
 import { AdSlot } from '../../src/components/AdSlot';
+import { getEntitlementRepository } from '../../src/repositories';
+import type { EntitlementStatus } from '../../src/services/iap';
 import {
   scheduleDailyReminder,
   type ReminderPermissionStatus
@@ -40,6 +42,7 @@ export default function SettingsScreen() {
     loading: entitlementLoading,
     actionInFlight,
     statusMessage,
+    refreshEntitlement,
     purchasePremium,
     restorePremium
   } = useEntitlement();
@@ -148,6 +151,13 @@ export default function SettingsScreen() {
         : 'Upgrade to Premium';
   const restoreCta =
     actionInFlight === 'restore' ? 'Restoring...' : 'Restore Purchases';
+  const showTestingControls = process.env.NODE_ENV !== 'production';
+
+  const handleSimulateEntitlement = async (status: EntitlementStatus) => {
+    const repository = await getEntitlementRepository();
+    await repository.setEntitlement(status);
+    await refreshEntitlement();
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -275,6 +285,49 @@ export default function SettingsScreen() {
           {exportStatus && <Text style={styles.helperText}>{exportStatus}</Text>}
         </View>
       </View>
+      {showTestingControls && (
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Testing Controls</Text>
+          <View style={styles.card}>
+            <Text style={styles.helperText}>
+              Debug-only controls for entitlement smoke tests.
+            </Text>
+            <Pressable
+              style={({ pressed }) => [
+                styles.secondaryButton,
+                pressed && styles.exportButtonPressed
+              ]}
+              onPress={() => {
+                handleSimulateEntitlement('free').catch(() => undefined);
+              }}
+            >
+              <Text style={styles.secondaryButtonText}>Simulate Free</Text>
+            </Pressable>
+            <Pressable
+              style={({ pressed }) => [
+                styles.secondaryButton,
+                pressed && styles.exportButtonPressed
+              ]}
+              onPress={() => {
+                handleSimulateEntitlement('premium').catch(() => undefined);
+              }}
+            >
+              <Text style={styles.secondaryButtonText}>Simulate Premium</Text>
+            </Pressable>
+            <Pressable
+              style={({ pressed }) => [
+                styles.secondaryButton,
+                pressed && styles.exportButtonPressed
+              ]}
+              onPress={() => {
+                handleSimulateEntitlement('unknown').catch(() => undefined);
+              }}
+            >
+              <Text style={styles.secondaryButtonText}>Simulate Unknown</Text>
+            </Pressable>
+          </View>
+        </View>
+      )}
       <AdSlot placement="settings-footer" />
       </ScrollView>
     </SafeAreaView>

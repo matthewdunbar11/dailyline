@@ -16,8 +16,8 @@
 | P0 | `S3-004` | Build Settings premium section (upgrade + restore) | S3-001, S3-002 | Next | Done |
 | P1 | `S3-005` | Integrate ad wrapper and entitlement-driven ad removal | S3-003 | Next | Done |
 | P1 | `S3-006` | Add unit tests for entitlement transitions + gate behavior | S3-002, S3-003 | Next | Done |
-| P1 | `S3-007` | Add Maestro purchase/restore/ads smoke flows | S3-004, S3-005 | Later | Ready |
-| P1 | `S3-008` | Wire CI E2E smoke execution | S3-007 | Later | Ready |
+| P1 | `S3-007` | Add Maestro purchase/restore/ads smoke flows | S3-004, S3-005 | Later | Done |
+| P1 | `S3-008` | Wire CI E2E smoke execution | S3-007 | Later | Done |
 
 ## Sprint 4 Backlog (Premium AI)
 | Priority | Ticket | Description | Dependency | Column | Status |

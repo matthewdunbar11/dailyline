@@ -1,0 +1,29 @@
+name: Maestro Smoke
+
+on:
+  pull_request:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  maestro-dry-run:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        flow:
+          - maestro/sprint1.yaml
+          - maestro/sprint3-ads-gating.yaml
+          - maestro/sprint3-restore-smoke.yaml
+          - maestro/sprint3-unknown-fallback.yaml
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Maestro CLI
+        run: |
+          curl -Ls "https://get.maestro.mobile.dev" | bash
+          echo "$HOME/.maestro/bin" >> $GITHUB_PATH
+
+      - name: Validate Maestro flow
+        run: maestro test --dry-run "${{ matrix.flow }}"

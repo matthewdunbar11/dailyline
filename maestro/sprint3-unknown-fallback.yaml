@@ -1,0 +1,12 @@
+appId: com.matthewdunbar11.dailyline
+---
+- launchApp
+- tapOn: "Settings"
+- scrollUntilVisible:
+    element:
+      text: "Testing Controls"
+- tapOn: "Simulate Premium"
+- tapOn: "Simulate Unknown"
+- assertVisible: "Last known plan: premium"
+- tapOn: "Today"
+- assertNotVisible: "Sponsored placement: today-footer"

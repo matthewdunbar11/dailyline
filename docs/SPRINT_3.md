@@ -104,3 +104,10 @@ Out:
 7. Implemented `S3-006` entitlement and feature-gate transition tests:
 - Added integration-style tests covering purchase success transition behavior.
 - Added unknown-entitlement fallback tests for premium lock policy vs ad visibility policy.
+8. Implemented `S3-007` Maestro smoke flows for monetization checks:
+- Added ad-gating flow using testing entitlement toggles.
+- Added restore-action smoke flow.
+- Added unknown-entitlement fallback flow.
+9. Implemented `S3-008` CI wiring for Maestro smoke validation:
+- Added `maestro-smoke.yml` workflow on pull requests and nightly schedule.
+- Validates Maestro flows with `maestro test --dry-run` in CI.

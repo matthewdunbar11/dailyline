@@ -1,0 +1,11 @@
+appId: com.matthewdunbar11.dailyline
+---
+- launchApp
+- tapOn: "Settings"
+- scrollUntilVisible:
+    element:
+      text: "Testing Controls"
+- tapOn: "Simulate Premium"
+- assertVisible: "Restore Purchases"
+- tapOn: "Restore Purchases"
+- assertVisible: "In-app purchase client is not configured."
