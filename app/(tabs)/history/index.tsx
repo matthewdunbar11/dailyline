@@ -97,27 +97,31 @@ export default function HistoryScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.calendarHeader}>
-        <Pressable onPress={previousMonth}>
-          <Text style={styles.navButton}>
-            {'<'}
-          </Text>
-        </Pressable>
-        <Text style={styles.monthLabel}>{getMonthLabel(monthCursor)}</Text>
-        <Pressable onPress={nextMonth}>
-          <Text style={styles.navButton}>
-            {'>'}
-          </Text>
-        </Pressable>
+      <View style={styles.section}>
+        <View style={styles.calendarHeader}>
+          <Pressable onPress={previousMonth}>
+            <Text style={styles.navButton}>
+              {'<'}
+            </Text>
+          </Pressable>
+          <Text style={styles.monthLabel}>{getMonthLabel(monthCursor)}</Text>
+          <Pressable onPress={nextMonth}>
+            <Text style={styles.navButton}>
+              {'>'}
+            </Text>
+          </Pressable>
+        </View>
+        <View style={styles.calendarGrid}>{renderCalendarDays()}</View>
       </View>
-      <View style={styles.calendarGrid}>{renderCalendarDays()}</View>
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Search your entries"
-        placeholderTextColor={colors.muted}
-        value={query}
-        onChangeText={setQuery}
-      />
+      <View style={styles.section}>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search your entries"
+          placeholderTextColor={colors.muted}
+          value={query}
+          onChangeText={setQuery}
+        />
+      </View>
       <ScrollView contentContainerStyle={styles.list}>
         {filteredEntries.map((entry) => (
           <Link
@@ -149,6 +153,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     padding: 20
   },
+  section: {
+    marginTop: 16
+  },
   calendarHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -164,7 +171,7 @@ const styles = StyleSheet.create({
     color: colors.accent
   },
   calendarGrid: {
-    marginTop: 16,
+    marginTop: 12,
     flexDirection: 'row',
     flexWrap: 'wrap'
   },
@@ -198,7 +205,7 @@ const styles = StyleSheet.create({
   },
   list: {
     paddingVertical: 16,
-    gap: 12
+    gap: 16
   },
   entryCard: {
     backgroundColor: colors.card,

@@ -24,13 +24,15 @@ export default function InsightsScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Streaks</Text>
-      <View style={styles.card}>
-        <Text style={styles.label}>Current streak</Text>
-        <Text style={styles.value}>{streaks.current} days</Text>
-      </View>
-      <View style={styles.card}>
-        <Text style={styles.label}>Longest streak</Text>
-        <Text style={styles.value}>{streaks.longest} days</Text>
+      <View style={styles.section}>
+        <View style={styles.card}>
+          <Text style={styles.label}>Current streak</Text>
+          <Text style={styles.value}>{streaks.current} days</Text>
+        </View>
+        <View style={styles.card}>
+          <Text style={styles.label}>Longest streak</Text>
+          <Text style={styles.value}>{streaks.longest} days</Text>
+        </View>
       </View>
       <Text style={styles.subtitle}>Entries counted: {entries.length}</Text>
     </SafeAreaView>
@@ -49,8 +51,11 @@ const styles = StyleSheet.create({
     color: colors.text,
     marginBottom: 16
   },
+  section: {
+    gap: 16
+  },
   subtitle: {
-    marginTop: 24,
+    marginTop: 16,
     color: colors.muted
   },
   card: {
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderColor: colors.border,
     borderWidth: 1,
-    marginBottom: 12
+    marginBottom: 0
   },
   label: {
     color: colors.muted,

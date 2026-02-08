@@ -93,42 +93,48 @@ export default function TodayScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.dateLabel}>{entry.date}</Text>
-      <Text style={styles.sectionTitle}>Today&apos;s Line</Text>
-      <TextInput
-        style={[styles.input, !canEdit && styles.inputDisabled]}
-        placeholder="Write one line for today"
-        placeholderTextColor={colors.muted}
-        multiline
-        editable={canEdit}
-        value={entry.text}
-        onChangeText={(text) => setEntry({ ...entry, text })}
-      />
-      <Text style={styles.sectionTitle}>Mood (optional)</Text>
-      <TextInput
-        style={[styles.input, !canEdit && styles.inputDisabled]}
-        placeholder="Calm, energized, reflective"
-        placeholderTextColor={colors.muted}
-        editable={canEdit}
-        value={entry.mood ?? ''}
-        onChangeText={(mood) => setEntry({ ...entry, mood })}
-      />
-      <Text style={styles.sectionTitle}>Tags (comma separated)</Text>
-      <TextInput
-        style={[styles.input, !canEdit && styles.inputDisabled]}
-        placeholder="work, family, focus"
-        placeholderTextColor={colors.muted}
-        editable={canEdit}
-        value={entry.tags?.join(', ') ?? ''}
-        onChangeText={(tagsText) =>
-          setEntry({
-            ...entry,
-            tags: tagsText
-              .split(',')
-              .map((tag) => tag.trim())
-              .filter(Boolean)
-          })
-        }
-      />
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Today&apos;s Line</Text>
+        <TextInput
+          style={[styles.input, !canEdit && styles.inputDisabled]}
+          placeholder="Write one line for today"
+          placeholderTextColor={colors.muted}
+          multiline
+          editable={canEdit}
+          value={entry.text}
+          onChangeText={(text) => setEntry({ ...entry, text })}
+        />
+      </View>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Mood (optional)</Text>
+        <TextInput
+          style={[styles.input, !canEdit && styles.inputDisabled]}
+          placeholder="Calm, energized, reflective"
+          placeholderTextColor={colors.muted}
+          editable={canEdit}
+          value={entry.mood ?? ''}
+          onChangeText={(mood) => setEntry({ ...entry, mood })}
+        />
+      </View>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Tags (comma separated)</Text>
+        <TextInput
+          style={[styles.input, !canEdit && styles.inputDisabled]}
+          placeholder="work, family, focus"
+          placeholderTextColor={colors.muted}
+          editable={canEdit}
+          value={entry.tags?.join(', ') ?? ''}
+          onChangeText={(tagsText) =>
+            setEntry({
+              ...entry,
+              tags: tagsText
+                .split(',')
+                .map((tag) => tag.trim())
+                .filter(Boolean)
+            })
+          }
+        />
+      </View>
       <Pressable
         style={[styles.button, !canEdit && styles.buttonDisabled]}
         onPress={() =>
@@ -156,10 +162,12 @@ const styles = StyleSheet.create({
     color: colors.muted,
     marginBottom: 8
   },
+  section: {
+    marginTop: 16
+  },
   sectionTitle: {
     fontSize: 16,
     color: colors.text,
-    marginTop: 16,
     marginBottom: 8,
     fontWeight: '600'
   },

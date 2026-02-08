@@ -51,11 +51,12 @@ Out:
 - `S1B-001` audit completed; follow-up tickets added for UI consistency cleanup.
 - `S1B-002` completed with Ionicons mapped to tab navigation for Today, History, Insights, and Settings.
 - `S1B-007` completed with calendar highlight color aligned to the shared theme token.
+- `S1B-003` completed with layout polish updates to spacing rhythm on Today, History, Insights, and Settings.
 
 ### Ticket Status
 - `S1B-001`: ✅ Completed (UI audit documented below).
 - `S1B-002`: ✅ Completed (tab bar iconography added for core navigation).
-- `S1B-003`: ⏳ Pending.
+- `S1B-003`: ✅ Completed (spacing rhythm and section grouping adjusted on core screens).
 - `S1B-004`: ⏳ Pending.
 - `S1B-005`: 🆕 Proposed (normalize typography scale on core screens).
 - `S1B-006`: 🆕 Proposed (align card/input corner radii and spacing).
