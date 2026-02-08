@@ -15,6 +15,7 @@ import { useSettings } from '../../src/hooks/useSettings';
 import { useEntitlement } from '../../src/hooks/useEntitlement';
 import { exportDataToFile } from '../../src/services/exportService';
 import { getFeatureAccess } from '../../src/services/featureAccess';
+import { AdSlot } from '../../src/components/AdSlot';
 import {
   scheduleDailyReminder,
   type ReminderPermissionStatus
@@ -274,6 +275,7 @@ export default function SettingsScreen() {
           {exportStatus && <Text style={styles.helperText}>{exportStatus}</Text>}
         </View>
       </View>
+      <AdSlot placement="settings-footer" />
       </ScrollView>
     </SafeAreaView>
   );

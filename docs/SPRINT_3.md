@@ -97,3 +97,7 @@ Out:
 - Added entitlement hook wiring (`useEntitlement`) for plan state and purchase/restore actions.
 - Added Premium settings card with current plan, upgrade CTA, and gated restore action visibility.
 - Wired Premium section behavior through `FeatureAccessService` policy checks.
+6. Implemented `S3-005` ad wrapper integration with entitlement gating:
+- Added shared `AdSlot` component and ad visibility hook.
+- Wired ad slots into Today, History, Insights, and Settings screens.
+- Enforced ad show/hide behavior using entitlement-aware feature access rules.

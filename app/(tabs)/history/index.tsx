@@ -13,6 +13,7 @@ import { Link } from 'expo-router';
 import { colors } from '../../../src/theme/colors';
 import { filterEntries } from '../../../src/domain/search';
 import { getEntryRepository } from '../../../src/repositories';
+import { AdSlot } from '../../../src/components/AdSlot';
 import type { Entry } from '../../../src/types/entry';
 
 const getMonthLabel = (date: Date) =>
@@ -142,6 +143,7 @@ export default function HistoryScreen() {
             No entries yet. Your saved lines will appear here.
           </Text>
         )}
+        <AdSlot placement="history-list-footer" />
       </ScrollView>
     </SafeAreaView>
   );
