@@ -16,6 +16,9 @@ jobs:
           - maestro/sprint3-ads-gating.yaml
           - maestro/sprint3-restore-smoke.yaml
           - maestro/sprint3-unknown-fallback.yaml
+          - maestro/sprint4-ai-locked.yaml
+          - maestro/sprint4-ai-unlocked.yaml
+          - maestro/sprint4-ai-toggle.yaml
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

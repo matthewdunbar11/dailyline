@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Pressable,
@@ -52,6 +52,7 @@ export default function SettingsScreen() {
   const [isScheduling, setIsScheduling] = useState(false);
   const [exportStatus, setExportStatus] = useState<string | null>(null);
   const [isExporting, setIsExporting] = useState(false);
+  const previousEntitlementRef = useRef<'free' | 'premium'>(effectiveEntitlement);
 
   const handleToggleReminder = async (enabled: boolean) => {
     await updateSettings({ reminderEnabled: enabled });
@@ -123,6 +124,26 @@ export default function SettingsScreen() {
     }
   };
 
+  const handleToggleAiInsights = async (enabled: boolean) => {
+    await updateSettings({ aiInsightsEnabled: enabled });
+  };
+
+  useEffect(() => {
+    if (!settings) {
+      return;
+    }
+
+    const previousEntitlement = previousEntitlementRef.current;
+    const unlockedPremium =
+      previousEntitlement !== 'premium' && effectiveEntitlement === 'premium';
+
+    if (unlockedPremium && !settings.aiInsightsEnabled) {
+      updateSettings({ aiInsightsEnabled: true }).catch(() => undefined);
+    }
+
+    previousEntitlementRef.current = effectiveEntitlement;
+  }, [effectiveEntitlement, settings, updateSettings]);
+
   if (loading || !settings) {
     return (
       <SafeAreaView style={styles.container}>
@@ -156,6 +177,9 @@ export default function SettingsScreen() {
   const handleSimulateEntitlement = async (status: EntitlementStatus) => {
     const repository = await getEntitlementRepository();
     await repository.setEntitlement(status);
+    if (status === 'premium' && !settings.aiInsightsEnabled) {
+      await updateSettings({ aiInsightsEnabled: true });
+    }
     await refreshEntitlement();
   };
 
@@ -283,6 +307,44 @@ export default function SettingsScreen() {
             </Text>
           </Pressable>
           {exportStatus && <Text style={styles.helperText}>{exportStatus}</Text>}
+        </View>
+      </View>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>AI Insights</Text>
+        <View style={styles.card}>
+          <Pressable
+            style={styles.row}
+            onPress={() => {
+              if (!isPremium) {
+                return;
+              }
+              handleToggleAiInsights(!settings.aiInsightsEnabled).catch(() => undefined);
+            }}
+          >
+            <Text style={styles.label}>Enable AI Insights</Text>
+            <Switch
+              value={settings.aiInsightsEnabled}
+              onValueChange={(enabled) => {
+                handleToggleAiInsights(enabled).catch(() => undefined);
+              }}
+              trackColor={{ false: colors.border, true: colors.accent }}
+              thumbColor="#FFFFFF"
+              disabled={!isPremium}
+            />
+          </Pressable>
+          <Text style={styles.helperText}>
+            All AI processing stays on-device and uses only your local journal data.
+          </Text>
+          {!isPremium && (
+            <Text style={styles.helperText}>
+              Upgrade to Premium to unlock AI cards in the Insights tab.
+            </Text>
+          )}
+          {isPremium && !settings.aiInsightsEnabled && (
+            <Text style={styles.helperText}>
+              AI cards are currently hidden in Insights. Re-enable this toggle at any time.
+            </Text>
+          )}
         </View>
       </View>
       {showTestingControls && (

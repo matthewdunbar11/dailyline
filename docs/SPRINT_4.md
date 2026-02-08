@@ -1,11 +1,11 @@
 # DailyLine Sprint 4 Plan
 
-**Status:** Planned (updated February 8, 2026)
+**Status:** Completed (implemented February 8, 2026)
 
 ## 1. Planning Context (MVP + Current State Review)
 From `MVP_SPEC.md`, current code, and prior sprint docs:
 1. Core journaling, reminder, and export features are implemented.
-2. Sprint 3 is planned to deliver IAP entitlement, restore purchases, and ads behavior.
+2. Sprint 3 delivered IAP entitlement, restore purchases, and ads behavior.
 3. MVP AI insight requirements are still open and require local-only computation with premium gating.
 
 Sprint 4 maps to MVP Implementation Phase 6 and focuses on premium AI insights once Sprint 3 gates are in place.
@@ -87,4 +87,27 @@ If Sprint 3 is partially complete, Sprint 4 starts with a short stabilization la
 
 ## 10. Planning Status Update (February 8, 2026)
 1. Added `docs/SPRINT_BACKLOG.md` to sequence Sprint 3 prerequisites ahead of Sprint 4 AI delivery.
-2. Sprint 4 remains gated on Sprint 3 entitlement/gating completion before AI card implementation begins.
+2. Sprint 4 planning was intentionally gated on Sprint 3 entitlement/gating completion before AI card implementation.
+
+## 11. Execution Status Update (February 8, 2026)
+1. Completed `S4-001`, `S4-002`, and `S4-003` via new local AI service `src/services/aiInsights.ts`:
+- Sentiment timeline, mood patterns, theme mining, streak quality, early-warning, weekly reflection, and compare-period modules.
+- Deterministic scoring and sparse-data fallback states (`ready` / `insufficient`).
+2. Completed `S4-004` Insights UI rollout in `app/(tabs)/insights.tsx`:
+- Added monthly consistency core card.
+- Added premium AI cards with `locked`, `enabled`, and `insufficient data` behavior.
+- Wired locked-card upgrade CTA to Settings.
+3. Completed `S4-005` Settings wiring in `app/(tabs)/settings.tsx`:
+- Added `Enable AI Insights` toggle.
+- Added local-processing disclosure copy.
+- Added premium-unlock behavior to default AI insights on.
+4. Completed `S4-006` Maestro smoke additions:
+- `maestro/sprint4-ai-locked.yaml`
+- `maestro/sprint4-ai-unlocked.yaml`
+- `maestro/sprint4-ai-toggle.yaml`
+5. Completed `S4-007` CI coverage expansion:
+- Added Sprint 4 Maestro flows to `.github/workflows/maestro-smoke.yml`.
+6. Verification:
+- Unit tests passed locally (`npm test -- --runInBand`): 43/43.
+- TypeScript compile passed locally (`npx tsc --noEmit`).
+- Local Maestro CLI is unavailable in this environment (`maestro: command not found`); Sprint 4 flows are validated by CI dry-run matrix.

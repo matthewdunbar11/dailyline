@@ -1,0 +1,12 @@
+appId: com.matthewdunbar11.dailyline
+---
+- launchApp
+- tapOn: "Settings"
+- scrollUntilVisible:
+    element:
+      text: "Testing Controls"
+- tapOn: "Simulate Premium"
+- tapOn: "Insights"
+- assertVisible: "AI Sentiment Timeline"
+- assertVisible: "Direction:"
+- assertNotVisible: "Upgrade in Settings"
