@@ -1,6 +1,6 @@
 # DailyLine Sprint 1B Plan (Pre-Sprint 2)
 
-**Status:** Planned
+**Status:** Completed
 
 ## 1. Sprint Outcome
 Ship a lightweight UI polish pass that tidies the interface and adds icons to menu buttons to improve scan-ability without expanding feature scope.
@@ -35,10 +35,9 @@ Out:
 1. `S1B-001`: UI audit + capture spacing/typography inconsistencies across core screens.
 2. `S1B-002`: Add icon set and map icons to tab/menu buttons with accessibility review.
 3. `S1B-003`: Apply layout polish pass on Today, History, Insights, Settings screens.
-4. `S1B-004`: Verify UI polish in simulator/web and document outcomes.
-5. `S1B-005`: Normalize typography scale (titles, section headers, metadata) across core screens.
-6. `S1B-006`: Align card/input corner radii and spacing rhythm across core screens.
-7. `S1B-007`: Replace hard-coded calendar highlight color with theme token.
+4. `S1B-005`: Normalize typography scale (titles, section headers, metadata) across core screens.
+5. `S1B-006`: Align card/input corner radii and spacing rhythm across core screens.
+6. `S1B-007`: Replace hard-coded calendar highlight color with theme token.
 
 ## 6. Risk / Notes
 - Keep changes minimal to avoid scope creep before Sprint 2.
@@ -52,14 +51,15 @@ Out:
 - `S1B-002` completed with Ionicons mapped to tab navigation for Today, History, Insights, and Settings.
 - `S1B-007` completed with calendar highlight color aligned to the shared theme token.
 - `S1B-003` completed with layout polish updates to spacing rhythm on Today, History, Insights, and Settings.
+- `S1B-005` completed with normalized typography scale across core screens.
+- `S1B-006` completed with aligned card/input corner radii and spacing rhythm.
 
 ### Ticket Status
 - `S1B-001`: ✅ Completed (UI audit documented below).
 - `S1B-002`: ✅ Completed (tab bar iconography added for core navigation).
 - `S1B-003`: ✅ Completed (spacing rhythm and section grouping adjusted on core screens).
-- `S1B-004`: ⏳ Pending.
-- `S1B-005`: 🆕 Proposed (normalize typography scale on core screens).
-- `S1B-006`: 🆕 Proposed (align card/input corner radii and spacing).
+- `S1B-005`: ✅ Completed (normalize typography scale on core screens).
+- `S1B-006`: ✅ Completed (align card/input corner radii and spacing).
 - `S1B-007`: ✅ Completed (calendar highlight now uses theme token).
 
 ### UI Audit Notes (S1B-001)

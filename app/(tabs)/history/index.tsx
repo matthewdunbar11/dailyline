@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 6,
-    borderRadius: 10
+    borderRadius: 12
   },
   calendarCellActive: {
     backgroundColor: colors.calendarHighlight

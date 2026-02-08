@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: colors.card,
-    borderRadius: 16,
+    borderRadius: 12,
     padding: 16,
     borderColor: colors.border,
     borderWidth: 1
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     marginBottom: 8
   },
   text: {
-    fontSize: 16,
+    fontSize: 14,
     color: colors.text
   },
   meta: {
