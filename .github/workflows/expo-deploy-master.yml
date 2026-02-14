@@ -1,0 +1,37 @@
+name: Expo Deploy (Master)
+
+on:
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: expo-deploy-master
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Run unit tests
+        run: npm test -- --runInBand
+
+      - name: Publish production update to Expo servers
+        run: eas update --auto --channel production --environment production

@@ -113,8 +113,8 @@ Out:
 ### CI Updates
 - Added a pull request GitHub Action to run the test suite on every PR.
 - Fixed settings repository test typing to keep CI green.
-- Added Render deploy workflow for `master` production deploy hooks and PR preview deploy hooks.
-- Updated EAS update workflow to inject `EXPO_PUBLIC_API_ENDPOINT` for production vs preview environments so OTA updates target the correct Render backend.
+- Consolidated Expo deploy automation into dedicated `master` and PR GitHub Actions pipelines that publish EAS updates to Expo servers.
+- Updated EAS deploy flow to use Expo `production` and `preview` environments so `EXPO_PUBLIC_API_ENDPOINT` resolves to the correct backend per environment from Expo-managed env vars.
 
 ## 5. Suggested First Tickets
 1. `S1-001`: Initialize Expo app skeleton + lint/test config.
