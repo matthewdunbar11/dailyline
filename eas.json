@@ -18,6 +18,16 @@
       "channel": "production"
     }
   },
+  "update": {
+    "preview": {
+      "channel": "preview",
+      "environment": "preview"
+    },
+    "production": {
+      "channel": "production",
+      "environment": "production"
+    }
+  },
   "submit": {
     "production": {}
   }

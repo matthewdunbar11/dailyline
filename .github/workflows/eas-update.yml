@@ -28,12 +28,27 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Publish EAS update to production
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
-        run: eas update --channel production --auto
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        env:
+          EXPO_PUBLIC_API_ENDPOINT: ${{ secrets.RENDER_PRODUCTION_API_ENDPOINT }}
+        run: |
+          if [ -z "$EXPO_PUBLIC_API_ENDPOINT" ]; then
+            echo "RENDER_PRODUCTION_API_ENDPOINT is not set"
+            exit 1
+          fi
+
+          eas update --channel production --environment production --auto
 
       - name: Publish EAS update to PR channel
         if: github.event_name == 'pull_request'
+        env:
+          EXPO_PUBLIC_API_ENDPOINT: ${{ secrets.RENDER_PREVIEW_API_ENDPOINT }}
         run: |
+          if [ -z "$EXPO_PUBLIC_API_ENDPOINT" ]; then
+            echo "RENDER_PREVIEW_API_ENDPOINT is not set"
+            exit 1
+          fi
+
           CHANNEL="pr-${{ github.event.number }}"
           echo "Publishing to channel: $CHANNEL"
-          eas update --channel "$CHANNEL" --auto
+          eas update --channel "$CHANNEL" --environment preview --auto
