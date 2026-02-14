@@ -1,13 +1,20 @@
-name: EAS Update
+name: Expo Deploy (PR)
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+concurrency:
+  group: expo-deploy-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
-  update:
+  deploy:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -27,13 +34,11 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
-      - name: Publish EAS update to production
-        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
-        run: eas update --channel production --auto
+      - name: Run unit tests
+        run: npm test -- --runInBand
 
-      - name: Publish EAS update to PR channel
-        if: github.event_name == 'pull_request'
+      - name: Publish PR update to Expo servers
         run: |
           CHANNEL="pr-${{ github.event.number }}"
           echo "Publishing to channel: $CHANNEL"
-          eas update --channel "$CHANNEL" --auto
+          eas update --auto --channel "$CHANNEL" --environment preview
